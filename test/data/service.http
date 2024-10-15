@@ -1,0 +1,44 @@
+# In the following requests the variable baseUrl is used.
+# Its value is set here.
+@baseUrl = http://localhost:4004
+
+###
+
+# Get all LargeOrders - un-authenticated
+GET {{baseUrl}}/ticket/LargeOrder
+
+###
+
+# Get specific LargeOrder with TicketID = "Ticket4448"
+# @name Ticket7366
+GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket7366'
+
+###
+
+@PONumber = {{Ticket7366.response.body.$.value[0].PONumber}}
+@ID1 = {{Ticket7366.response.body.$.value[0].ID}}
+@ID2 = "3686FDCA-DA35-4FD4-A08F-2E2ECAB2C81E"
+
+###
+
+PATCH {{baseUrl}}/ticket/LargeOrder({{ID2}})
+Content-Type: application/json
+
+{
+   "PONumber" : "sheit"
+}
+
+###
+
+# Get specific LargeOrder with TicketID = "Ticket7366"
+GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket7366'
+
+###
+
+# Call teh CreateInitialTicket Action
+POST {{baseUrl}}/ticket/LargeOrder/createTicketFromC4C
+Content-Type: application/json
+
+{
+   "TicketObjectID" : "1111TicketObjectID"
+}

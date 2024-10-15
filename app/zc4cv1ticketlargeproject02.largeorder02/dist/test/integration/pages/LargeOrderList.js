@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/test/ListReport"],function(e){"use strict";var t={actions:{},assertions:{}};return new e({appId:"zc4cv1ticketlargeproject02.largeorder02",componentId:"LargeOrderList",contextPath:"/LargeOrder"},t)});
+//# sourceMappingURL=LargeOrderList.js.map

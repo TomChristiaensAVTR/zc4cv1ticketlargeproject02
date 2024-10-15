@@ -1,0 +1,218 @@
+_schema-version: '3.1'
+ID: zc4cv1ticketlargeproject02
+version: 1.0.0
+description: A simple CAP project.
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - rm -rf build/dist
+        - mkdir -p build/dist
+        - rm -rf build/ui-deployer
+        - mkdir -p build/ui-deployer
+    - builder: custom
+      commands:
+        - npm install --production
+        - >-
+          bash -c "cds -v | grep 'cds-dk' || npm i --production --no-save
+          @sap/cds-dk @sap/mdk-tools"
+        - bash -c "export PATH=$PATH:$(pwd)/node_modules/.bin"
+        - cds build --production
+  after-all:
+    - builder: custom
+      commands:
+        - npm install
+modules:
+  - name: zc4cv1ticketlargeproject02-zc4cv1ticketlargeproject02.largeorder02
+    type: html5
+    path: app/zc4cv1ticketlargeproject02.largeorder02
+    build-parameters:
+      builder: custom
+      commands:
+        - rm -rf dist-zip dist
+        - npm install
+        - >-
+          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist
+          --include-task=generateCachebusterInfo
+        - mkdir dist-zip
+        - >-
+          bash -c "cd dist && npx bestzip
+          ../dist-zip/zc4cv1ticketlargeproject02largeorder02.zip *"
+      _artifactName: zc4cv1ticketlargeproject02largeorder02.zip
+      supported-platforms: []
+      build-result: dist-zip
+  - name: zc4cv1ticketlargeproject02-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+      ignore:
+        - node_modules
+        - package-lock.json
+    requires:
+      - name: zc4cv1ticketlargeproject02-service-uaa
+      - name: zc4cv1ticketlargeproject02-service-db
+  - name: zc4cv1ticketlargeproject02-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      memory: 256MB
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    build-parameters:
+      builder: npm
+      ignore:
+        - node_modules
+        - package-lock.json
+    requires:
+      - name: zc4cv1ticketlargeproject02-service-uaa
+      - name: zc4cv1ticketlargeproject02-service-db
+      - name: zc4cv1ticketlargeproject02-service-destination
+      - name: zc4cv1ticketlargeproject02-service-metadata
+      - name: zc4cv1ticketlargeproject02-service-connectivity
+      - name: zc4cv1ticketlargeproject02-service-logs
+  - name: zc4cv1ticketlargeproject02-aux-destinations
+    type: com.sap.application.content
+    parameters:
+      content:
+        subaccount:
+          existing_destinations_policy: update
+          destinations:
+            - Authentication: OAuth2UserTokenExchange
+              Name: zc4cv1ticketlargeproject02-service-uaa
+              ServiceInstanceName: zc4cv1ticketlargeproject02-uaa
+              ServiceKeyName: zc4cv1ticketlargeproject02-uaa-key
+              sap.cloud.service: lcap.zc4cv1ticketlargeproject02
+            - Authentication: OAuth2UserTokenExchange
+              Name: zc4cv1ticketlargeproject02-app-srv
+              TokenServiceInstanceName: zc4cv1ticketlargeproject02-uaa
+              TokenServiceKeyName: zc4cv1ticketlargeproject02-uaa-key
+              URL: ~{srv-api/srv-url}
+              sap.cloud.service: lcap.zc4cv1ticketlargeproject02
+            - Name: zc4cv1ticketlargeproject02-service-html5-apps-repo-host
+              ServiceInstanceName: zc4cv1ticketlargeproject02-html5-apps-repo-host
+              ServiceKeyName: zc4cv1ticketlargeproject02-html5-apps-repo-host-key
+              sap.cloud.service: lcap.zc4cv1ticketlargeproject02
+            - Authentication: OAuth2UserTokenExchange
+              Name: zc4cv1ticketlargeproject02-LargeOrder
+              TokenServiceInstanceName: zc4cv1ticketlargeproject02-uaa
+              TokenServiceKeyName: zc4cv1ticketlargeproject02-uaa-key
+              URL: ~{srv-api/srv-url}/ticket
+              sap.cloud.service: lcap.zc4cv1ticketlargeproject02
+              sap.applicationdevelopment.actions.enabled: true
+              sap.build.usage: CAP
+              sap.processautomation.enabled: true
+              HTML5.DynamicDestination: true
+              WebIDEEnabled: true
+              MobileEnabled: true
+              AppgyverEnabled: true
+    build-parameters:
+      no-source: true
+    requires:
+      - name: zc4cv1ticketlargeproject02-service-uaa
+        parameters:
+          service-key:
+            name: zc4cv1ticketlargeproject02-uaa-key
+      - name: srv-api
+      - name: zc4cv1ticketlargeproject02-service-html5-apps-repo-host
+        parameters:
+          service-key:
+            name: zc4cv1ticketlargeproject02-html5-apps-repo-host-key
+      - name: zc4cv1ticketlargeproject02-service-destination
+        parameters:
+          content-target: true
+  - name: zc4cv1ticketlargeproject02-launchpad
+    type: html5
+    path: build/launchpad
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - >-
+          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist
+          --include-task=generateCachebusterInfo
+        - bash -c "cd dist && npx bestzip ../../../build/dist/launchpad.zip *"
+        - rm -rf dist
+      _artifactName: launchpad.zip
+      supported-platforms: []
+      build-result: ../../build/dist
+  - name: zc4cv1ticketlargeproject02-aux-ui-deployer
+    type: com.sap.application.content
+    path: build/ui-deployer
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: zc4cv1ticketlargeproject02-zc4cv1ticketlargeproject02.largeorder02
+          artifacts:
+            - zc4cv1ticketlargeproject02largeorder02.zip
+          target-path: resources
+        - name: zc4cv1ticketlargeproject02-launchpad
+          artifacts:
+            - launchpad.zip
+          target-path: resources
+    requires:
+      - name: zc4cv1ticketlargeproject02-service-html5-apps-repo-host
+        parameters:
+          content-target: true
+resources:
+  - type: org.cloudfoundry.managed-service
+    name: zc4cv1ticketlargeproject02-service-uaa
+    parameters:
+      service: xsuaa
+      service-plan: application
+      service-name: zc4cv1ticketlargeproject02-uaa
+      path: xs-security.json
+      config:
+        oauth2-configuration:
+          redirect-uris:
+            - https://*.${default-domain}/login/*
+        xsappname: zc4cv1ticketlargeproject02-${space}
+        role-collections: []
+  - type: org.cloudfoundry.managed-service
+    name: zc4cv1ticketlargeproject02-service-db
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+      service-name: zc4cv1ticketlargeproject02-db
+  - type: org.cloudfoundry.managed-service
+    name: zc4cv1ticketlargeproject02-service-destination
+    parameters:
+      service: destination
+      service-plan: lite
+      service-name: zc4cv1ticketlargeproject02-destination
+      config:
+        HTML5Runtime_enabled: true
+        version: 1.0.0
+  - type: org.cloudfoundry.user-provided-service
+    name: zc4cv1ticketlargeproject02-service-metadata
+    parameters:
+      service: metadata
+      service-plan: standard
+      service-name: zc4cv1ticketlargeproject02-metadata
+      config:
+        default-domain: ${default-domain}
+  - type: org.cloudfoundry.managed-service
+    name: zc4cv1ticketlargeproject02-service-connectivity
+    parameters:
+      service: connectivity
+      service-plan: lite
+      service-name: zc4cv1ticketlargeproject02-connectivity
+  - type: org.cloudfoundry.managed-service
+    name: zc4cv1ticketlargeproject02-service-logs
+    parameters:
+      service: application-logs
+      service-plan: lite
+      service-name: zc4cv1ticketlargeproject02-logs
+  - type: org.cloudfoundry.managed-service
+    name: zc4cv1ticketlargeproject02-service-html5-apps-repo-host
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+      service-name: zc4cv1ticketlargeproject02-html5-apps-repo-host

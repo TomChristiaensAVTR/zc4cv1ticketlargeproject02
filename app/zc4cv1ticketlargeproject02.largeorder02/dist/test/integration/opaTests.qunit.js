@@ -1,0 +1,2 @@
+sap.ui.require(["sap/fe/test/JourneyRunner","zc4cv1ticketlargeproject02/largeorder02/test/integration/FirstJourney","zc4cv1ticketlargeproject02/largeorder02/test/integration/pages/LargeOrderList","zc4cv1ticketlargeproject02/largeorder02/test/integration/pages/LargeOrderObjectPage"],function(e,r,t,a){"use strict";var e=new e({launchUrl:sap.ui.require.toUrl("zc4cv1ticketlargeproject02/largeorder02")+"/index.html"});e.run({pages:{onTheLargeOrderList:t,onTheLargeOrderObjectPage:a}},r.run)});
+//# sourceMappingURL=opaTests.qunit.js.map

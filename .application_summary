@@ -1,0 +1,5 @@
+{
+  "ProjectOverviewURL": "https://avtradt.launchpad.cfapps.us10.hana.ondemand.com/lcapzc4cv1ticketlargeproject02.zc4cv1ticketlargeproject02Launchpad-1.0.0/",
+  "DeployedUTCTime": "2024-10-15T11:46:03.316Z",
+  "ApplicationLogURL": "https://logs.cf.us10-001.hana.ondemand.com/app/dashboards#/view/Overview?_g=(filters:!((query:(match_phrase:(component_name:zc4cv1ticketlargeproject02-srv)))))"
+}
