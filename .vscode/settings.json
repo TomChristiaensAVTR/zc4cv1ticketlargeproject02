@@ -12,8 +12,6 @@
         "*.cim": "default",
         "*.rule": "default",
         "*.properties": "default",
-        "*.fragment": "default",
-        "{git,gitlens}:/**/*.{sql,dsql}": "default",
-        "*.cds": "cds.graphical.modeler.open"
+        "*.fragment": "default"
     }
 }

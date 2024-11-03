@@ -1,68 +1,8 @@
-using LargeOrder as service from '../../srv/service';
+using AdminService as service from '../../srv/service';
 annotate service.LargeOrder with @(
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
         Data : [
-            {
-                $Type : 'UI.DataField',
-                Label : 'InsideDelivery',
-                Value : InsideDelivery,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'InsideDeliveryComment',
-                Value : InsideDeliveryComment,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'Liftgate',
-                Value : Liftgate,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'LiftgateComment',
-                Value : LiftgateComment,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'SpecialDeliveryRequirements',
-                Value : SpecialDeliveryRequirements,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'SpecialDeliveryRequirementsComment',
-                Value : SpecialDeliveryRequirementsComment,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'Installation',
-                Value : Installation,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'InstallationComment',
-                Value : InstallationComment,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'ConsolidatedInvoicing',
-                Value : ConsolidatedInvoicing,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'ConsolidatedInvoicingComment',
-                Value : ConsolidatedInvoicingComment,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'GrantFunds',
-                Value : GrantFunds,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'GrantFundsComment',
-                Value : GrantFundsComment,
-            },
             {
                 $Type : 'UI.DataField',
                 Label : 'NewConstruction',
@@ -123,6 +63,49 @@ annotate service.LargeOrder with @(
             Target : '@UI.Identification',
         },
         {
+            $Type : 'UI.CollectionFacet',
+            Label : 'General Group Section',
+            ID : 'GeneralGroupSection',
+            Facets : [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : 'Inside Delivery subsection',
+                    ID : 'InsideDeliverysubsection',
+                    Target : '@UI.FieldGroup#InsideDeliverysubsection',
+                },
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : 'Special Delivery Requirements subsection',
+                    ID : 'SpecialDeliveryRequirementssubsection',
+                    Target : '@UI.FieldGroup#SpecialDeliveryRequirementssubsection',
+                },
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : 'Liftgate subsection',
+                    ID : 'SpecialDeliveryRequirementssubsection1',
+                    Target : '@UI.FieldGroup#SpecialDeliveryRequirementssubsection1',
+                },
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : 'Installation subsection',
+                    ID : 'Installationsubsection',
+                    Target : '@UI.FieldGroup#Installationsubsection',
+                },
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : 'Consolidated Invoicing subsection',
+                    ID : 'ConsolidatedInvoicingsubsection',
+                    Target : '@UI.FieldGroup#ConsolidatedInvoicingsubsection',
+                },
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : 'Grant Funds subsection',
+                    ID : 'GrantFundssubsection',
+                    Target : '@UI.FieldGroup#GrantFundssubsection',
+                },
+            ],
+        },
+        {
             $Type : 'UI.ReferenceFacet',
             ID : 'GeneratedFacet1',
             Label : '{i18n>GeneralInformation}',
@@ -158,6 +141,7 @@ annotate service.LargeOrder with @(
             $Type : 'UI.DataField',
             Label : '{i18n>C4cTicketId}',
             Value : TicketID,
+            ![@UI.Importance] : #High,
         },
         {
             $Type : 'UI.DataField',
@@ -245,6 +229,117 @@ annotate service.LargeOrder with @(
             },
         ],
     },
+    UI.FieldGroup #InsideDeliverysubsection : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'InsideDelivery',
+                Value : InsideDelivery_code,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'InsideDeliveryComment',
+                Value : InsideDeliveryComment,
+            },
+        ],
+    },
+    UI.FieldGroup #SpecialDeliveryRequirementssubsection : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'SpecialDeliveryRequirements',
+                Value : SpecialDeliveryRequirements,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'SpecialDeliveryRequirementsComment',
+                Value : SpecialDeliveryRequirementsComment,
+            },
+        ],
+    },
+    UI.FieldGroup #SpecialDeliveryRequirementssubsection1 : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'Liftgate',
+                Value : Liftgate,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'LiftgateComment',
+                Value : LiftgateComment,
+            },
+        ],
+    },
+    UI.FieldGroup #Installationsubsection : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'Installation',
+                Value : Installation,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'InstallationComment',
+                Value : InstallationComment,
+            },
+        ],
+    },
+    UI.FieldGroup #ConsolidatedInvoicingsubsection : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'ConsolidatedInvoicing',
+                Value : ConsolidatedInvoicing,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'ConsolidatedInvoicingComment',
+                Value : ConsolidatedInvoicingComment,
+            },
+        ],
+    },
+    UI.FieldGroup #GrantFundssubsection : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'GrantFunds',
+                Value : GrantFunds,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'GrantFundsComment',
+                Value : GrantFundsComment,
+            },
+        ],
+    },
+    UI.SelectionPresentationVariant #table : {
+        $Type : 'UI.SelectionPresentationVariantType',
+        PresentationVariant : {
+            $Type : 'UI.PresentationVariantType',
+            Visualizations : [
+                '@UI.LineItem',
+            ],
+            SortOrder : [
+                {
+                    $Type : 'Common.SortOrderType',
+                    Property : TicketID,
+                    Descending : true,
+                },
+            ],
+        },
+        SelectionVariant : {
+            $Type : 'UI.SelectionVariantType',
+            SelectOptions : [
+            ],
+        },
+    },
 );
 
 annotate service.LargeOrder with {
@@ -260,7 +355,9 @@ annotate service.LargeOrder with {
 };
 
 annotate service.LargeOrder with {
-    InsideDeliveryComment @UI.MultiLineText : true
+    InsideDeliveryComment @(
+        UI.MultiLineText : true
+    )
 };
 
 annotate service.LargeOrder with {
@@ -301,5 +398,13 @@ annotate service.LargeOrder with {
 
 annotate service.LargeOrder with {
     ProjectedDeliveryDateComment @UI.MultiLineText : true
+};
+
+annotate service.LargeOrder with {
+    ProjectValue_amount @Common.Text : ProjectValue_currency_code
+};
+
+annotate service.LargeOrder with {
+    TicketID @Common.FieldControl : #Mandatory
 };
 

@@ -6,17 +6,18 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.13.6",
     "@cap-js/hana": "^1",
     "@sap-cloud-sdk/http-client": "^3.21.0",
     "@sap-cloud-sdk/util": "^3.21.0",
     "@sap/cds": "^8",
     "@sap/low-code-event-handler": "^1.2.4",
+    "@sap/mdk-tools": "^1.3.1",
     "@sap/xsenv": ">=3.3.2 <3.3.3",
     "@sap/xssec": "^4.2.4",
     "express": "^4",
     "hdb": "^0.19.9",
-    "passport": "^0.7.0",
-    "@sap/mdk-tools": "^1.3.1"
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.6",
@@ -29,7 +30,8 @@
     "start-local": "npm run generate-entry-point && npm run cds-watch",
     "generate-entry-point": "dev-cap-tools gen-entrypoint",
     "cds-watch": "cds watch --open",
-    "watch-zc4cv1ticketlargeproject02.largeorder02": "cds watch --open zc4cv1ticketlargeproject02.largeorder02/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-zc4cv1ticketlargeproject02.largeorder02": "cds watch --open zc4cv1ticketlargeproject02.largeorder02/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-zc4cv1ticketlargeproject02.largeorder02form": "cds watch --open zc4cv1ticketlargeproject02.largeorder02form/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
@@ -37,12 +39,26 @@
         "db": "hana",
         "auth": "xsuaa"
       },
+      "[development]": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": ":memory:"
+        }
+      },
       "app-service": {
         "impl": "@sap/low-code-event-handler"
       },
       "auth": {
         "[development]": {
-          "kind": "dummy"
+          "kind": "dummy",
+          "users": {
+            "adminuser": {
+              "password": "abcd1234",
+              "roles": [
+                "admin"
+              ]
+            }
+          }
         },
         "[production]": {
           "kind": "xsuaa"
@@ -55,6 +71,7 @@
   },
   "lcap": true,
   "sapux": [
-    "app/zc4cv1ticketlargeproject02.largeorder02"
+    "app/zc4cv1ticketlargeproject02.largeorder02",
+    "app/zc4cv1ticketlargeproject02.largeorder02form"
   ]
 }

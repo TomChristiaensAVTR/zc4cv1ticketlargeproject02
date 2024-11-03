@@ -6,39 +6,166 @@
 
 # Get all LargeOrders - un-authenticated
 GET {{baseUrl}}/ticket/LargeOrder
-
-###
-
-# Get specific LargeOrder with TicketID = "Ticket4448"
-# @name Ticket7366
-GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket7366'
-
-###
-
-@PONumber = {{Ticket7366.response.body.$.value[0].PONumber}}
-@ID1 = {{Ticket7366.response.body.$.value[0].ID}}
-@ID2 = "3686FDCA-DA35-4FD4-A08F-2E2ECAB2C81E"
-
-###
-
-PATCH {{baseUrl}}/ticket/LargeOrder({{ID2}})
 Content-Type: application/json
 
+###
+
+# Get all LargeOrders - authenticated
+GET {{baseUrl}}/ticket/LargeOrder
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+
+###
+
+# Get all LargeOrders - authenticated
+GET {{baseUrl}}/ticket/LargeOrder?$select=ID,TicketID&sap-language=en
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+
+###
+
+# Get all LargeOrders - authenticated
+GET {{baseUrl}}/ticket/LargeOrder?$select=ID,TicketID&sap-language=en
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+
+###
+
+GET {{baseUrl}}/ticket/LargeOrder?
+  # $select=ID,TicketID
+
+###
+
+# Get specific LargeOrder with TicketID = "Ticket2799"
+# @name Get1
+GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket2799'
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+
+###
+
+GET {{baseUrl}}/ticket/LargeOrder?ID=15d7fab6-5723-420b-8095-8b59c69dd340&IsActiveEntity=true
+
+###
+
+GET {{baseUrl}}/ticket/openTicketFromC4C?ID='15d7fab6-5723-420b-8095-8b59c69dd340'&IsActiveEntity=true
+
+
+###
+
+# @name Get2
+GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket2799'
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+
+###
+
+@Get2PONumber = {{Get2.response.body.$.value[0].PONumber}}
+@Get2ID1 = {{Get2.response.body.$.value[0].ID}}
+@Get2IsActiveEntity1 = {{Get2.response.body.$.value[0].IsActiveEntity}}
+@Get2IsActiveEntity2 = true
+@Get2ETag1 = {{Get2.response.body.$.value[0].modifiedAt}}
+
+###
+
+# @name Get3
+GET {{baseUrl}}/ticket/LargeOrder(ID='{{Get2ID1}}',IsActiveEntity=true)
+Content-Type: application/json
+Authorization: Basic adminuser:abcd1234
+
+###
+
+GET {{baseUrl}}/ticket/LargeOrder?ID='15d7fab6-5723-420b-8095-8b59c69dd340'&IsActiveEntity=true
+Content-Type: application/json
+Authorization: Basic adminuser:abcd1234
+
+###
+
+@Get3PONumber = {{Get3.response.body.$.PONumber}}
+@Get3ID1 = {{Get3.response.body.$.ID}}
+@Get3IsActiveEntity1 = {{Get3.response.body.$.IsActiveEntity}}
+@Get3IsActiveEntity2 = true
+@Get3ETag1 = {{Get3.response.headers.ETag}}
+@Get3IDasC4CID = {{Get3.response.body.$.TicketID}}
+
+###
+
+GET {{baseUrl}}/ticket/LargeOrder(ID='{{Get3IDasC4CID}}',IsActiveEntity=true)
+Content-Type: application/json
+Authorization: Basic adminuser:abcd1234
+
+###
+
+PATCH {{baseUrl}}/ticket/LargeOrder(ID='{{Get3ID1}}',IsActiveEntity=true)
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+If-Match: {{Get3ETag1}}
+
 {
+   "TicketObjectID" : "TicketObjectID130",
+   "PONumber" : "sheit6"
+}
+
+###
+
+PATCH {{baseUrl}}/ticket/LargeOrder(ID='{{Get3IDasC4CID}}',IsActiveEntity=true)
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+If-Match: {{Get3ETag1}}
+
+{
+   "TicketObjectID" : "TicketObjectID130",
    "PONumber" : "sheit"
 }
+
 
 ###
 
 # Get specific LargeOrder with TicketID = "Ticket7366"
 GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket7366'
+Authorization: Basic adminuser:abcd1234
 
 ###
 
-# Call teh CreateInitialTicket Action
-POST {{baseUrl}}/ticket/LargeOrder/createTicketFromC4C
+# Call the standard CREATE 
+POST {{baseUrl}}/ticket/LargeOrder
+Authorization: Basic adminuser:abcd1234
 Content-Type: application/json
 
 {
+   "ID" : "DB78D725-831E-1EDF-84BD-5800A3FF1D92",
+   "TicketID" : "2410202402",
    "TicketObjectID" : "1111TicketObjectID"
+}
+
+###
+
+# Get specific LargeOrder with TicketID = "Ticket7366"
+GET {{baseUrl}}/ticket/LargeOrder(ID='DB78D725-831E-1EDF-84BD-5800A3FF1D89',IsActiveEntity='false')
+Authorization: Basic adminuser:abcd1234
+
+###
+
+get {{baseUrl}}/ticket/LargeOrder(ID='Ticket7366')
+
+###
+
+POST {{baseUrl}}/ticket/LargeOrder
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+
+{
+   "ID" : "{{Get3ID1}}",
+   "TicketID" : "2410202402",
+   "TicketObjectID" : "1111TicketObjectID"
+}
+
+###
+
+POST {{baseUrl}}/ticket/LargeOrder
+Content-Type: application/json
+
+{
+  "TicketID": "sheit1",
+  "TicketObjectID": "sheit1ObjectID1"
 }

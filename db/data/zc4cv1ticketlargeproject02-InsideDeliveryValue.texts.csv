@@ -1,0 +1,9 @@
+locale;name;descr;code
+en;Yes;Yes;true
+fr;Yes;Yes;true
+de;Yes;Yes;true
+it;Yes;Yes;true
+en;No;No;false
+fr;No;No;false
+de;No;No;false
+it;No;No;false

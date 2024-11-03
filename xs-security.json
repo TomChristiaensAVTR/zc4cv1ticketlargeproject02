@@ -1,7 +1,33 @@
 {
-  "scopes": [],
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.admin",
+      "description": "admin"
+    },
+    {
+      "name": "$XSAPPNAME.display",
+      "description": "display"
+    }
+  ],
   "attributes": [],
-  "role-templates": [],
+  "role-templates": [
+    {
+      "name": "admin",
+      "description": "Large Order Administrator ",
+      "scope-references": [
+        "$XSAPPNAME.admin"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "display",
+      "description": "Display Large Orders",
+      "scope-references": [
+        "$XSAPPNAME.display"
+      ],
+      "attribute-references": []
+    }
+  ],
   "xsappname": "zc4cv1ticketlargeproject02",
   "tenant-mode": "dedicated"
 }

@@ -115,7 +115,7 @@
           "options": {
             "settings": {
               "contextPath": "/LargeOrder",
-              "variantManagement": "Page",
+              "variantManagement": "Control",
               "navigation": {
                 "LargeOrder": {
                   "detail": {
@@ -127,10 +127,22 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable",
-                    "enableExport": true
+                    "enableExport": true,
+                    "personalization": {
+                      "sort": true,
+                      "column": true,
+                      "filter": true
+                    },
+                    "selectAll": true,
+                    "selectionMode": "Single",
+                    "quickVariantSelection": {
+                      "showCounts": true
+                    }
                   }
                 }
-              }
+              },
+              "initialLoad": "Auto",
+              "defaultTemplateAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#table"
             }
           }
         },
@@ -141,7 +153,8 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/LargeOrder"
+              "contextPath": "/LargeOrder",
+              "additionalSemanticObjects": {}
             }
           }
         }

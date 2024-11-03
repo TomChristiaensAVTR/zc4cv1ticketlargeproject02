@@ -101,7 +101,7 @@ modules:
               ServiceKeyName: zc4cv1ticketlargeproject02-html5-apps-repo-host-key
               sap.cloud.service: lcap.zc4cv1ticketlargeproject02
             - Authentication: OAuth2UserTokenExchange
-              Name: zc4cv1ticketlargeproject02-LargeOrder
+              Name: zc4cv1ticketlargeproject02-AdminService
               TokenServiceInstanceName: zc4cv1ticketlargeproject02-uaa
               TokenServiceKeyName: zc4cv1ticketlargeproject02-uaa-key
               URL: ~{srv-api/srv-url}/ticket
@@ -174,7 +174,15 @@ resources:
           redirect-uris:
             - https://*.${default-domain}/login/*
         xsappname: zc4cv1ticketlargeproject02-${space}
-        role-collections: []
+        role-collections:
+          - description: 'Large Order Administrator '
+            name: zc4cv1ticketlargeproject02-admin-${space}
+            role-template-references:
+              - $XSAPPNAME.admin
+          - description: Display Large Orders
+            name: zc4cv1ticketlargeproject02-display-${space}
+            role-template-references:
+              - $XSAPPNAME.display
   - type: org.cloudfoundry.managed-service
     name: zc4cv1ticketlargeproject02-service-db
     parameters:

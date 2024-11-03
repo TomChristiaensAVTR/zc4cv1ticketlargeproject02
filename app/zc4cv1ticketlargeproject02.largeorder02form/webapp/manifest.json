@@ -1,23 +1,23 @@
 {
   "_version": "1.60.0",
   "sap.app": {
-    "id": "zc4cv1ticketlargeproject02.largeorder02",
+    "id": "zc4cv1ticketlargeproject02.largeorder02form",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
       "version": "0.0.1"
     },
-    "title": "{{ticketLargeOrder}}",
+    "title": "{{c4cTicketForm}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {
-      "id": "@sap/generator-fiori:lrop",
-      "version": "1.15.1",
-      "toolsId": "09465929-079b-42ca-923c-e3fb419d8aa7"
+      "id": "@sap/generator-fiori:feop",
+      "version": "1.15.3",
+      "toolsId": "9ee1ef5c-08c4-4157-819c-419c953e0b4a"
     },
     "dataSources": {
       "mainService": {
-        "uri": "ticket/",
+        "uri": "/ticket/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -73,7 +73,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "zc4cv1ticketlargeproject02.largeorder02.i18n.i18n"
+          "bundleName": "zc4cv1ticketlargeproject02.largeorder02form.i18n.i18n"
         }
       },
       "": {
@@ -97,55 +97,12 @@
       "config": {},
       "routes": [
         {
-          "pattern": ":?query:",
-          "name": "LargeOrderList",
-          "target": "LargeOrderList"
-        },
-        {
           "pattern": "LargeOrder({key}):?query:",
           "name": "LargeOrderObjectPage",
           "target": "LargeOrderObjectPage"
         }
       ],
       "targets": {
-        "LargeOrderList": {
-          "type": "Component",
-          "id": "LargeOrderList",
-          "name": "sap.fe.templates.ListReport",
-          "options": {
-            "settings": {
-              "contextPath": "/LargeOrder",
-              "variantManagement": "Control",
-              "navigation": {
-                "LargeOrder": {
-                  "detail": {
-                    "route": "LargeOrderObjectPage"
-                  }
-                }
-              },
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "ResponsiveTable",
-                    "enableExport": true,
-                    "personalization": {
-                      "sort": true,
-                      "column": true,
-                      "filter": true
-                    },
-                    "selectAll": true,
-                    "selectionMode": "Single",
-                    "quickVariantSelection": {
-                      "showCounts": true
-                    }
-                  }
-                }
-              },
-              "initialLoad": "Auto",
-              "defaultTemplateAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#table"
-            }
-          }
-        },
         "LargeOrderObjectPage": {
           "type": "Component",
           "id": "LargeOrderObjectPage",
@@ -154,7 +111,13 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/LargeOrder",
-              "additionalSemanticObjects": {}
+              "content": {
+                "header": {
+                  "visible": false,
+                  "anchorBarVisible": false
+                }
+              },
+              "sectionLayout": "Tabs"
             }
           }
         }
@@ -164,9 +127,5 @@
   "sap.fiori": {
     "registrationIds": [],
     "archeType": "transactional"
-  },
-  "sap.cloud": {
-    "public": true,
-    "service": "lcap.zc4cv1ticketlargeproject02"
   }
 }

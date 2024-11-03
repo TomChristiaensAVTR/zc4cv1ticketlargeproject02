@@ -1,0 +1,12 @@
+{
+    "version": "2.0",
+    "codes": [],
+    "configuration": {
+        "phase": "before",
+        "events": [
+            "READ"
+        ],
+        "entity": "AdminService.LargeOrder"
+    },
+    "hash": "c6e07f8b389be5d5d1d21d647a64769edac2b8f9639ca474987f41196a44b70ec243a53fa40214d47ea34a643efd7cd24c585848fb2c21e7f14184ea6288aa57"
+}
