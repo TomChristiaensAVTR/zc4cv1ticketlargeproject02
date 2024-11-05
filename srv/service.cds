@@ -1,4 +1,5 @@
 using { zc4cv1ticketlargeproject02 as my } from '../db/schema';
+using { sap.changelog as changelog } from '@cap-js/change-tracking';
 
 @path : '/ticket'
 service AdminService
@@ -15,6 +16,8 @@ service AdminService
     @odata.draft.enabled
     entity LargeOrder as
         projection on my.LargeOrder;
+
+    entity ChangeView as select from changelog.ChangeView; 
 
     action createTicketFromC4C
     (
@@ -45,3 +48,35 @@ annotate AdminService with @requires :
 ];
 
 annotate AdminService.LargeOrder with @Common.SemanticKey: [TicketID];
+
+// see https://github.com/cap-js/change-tracking
+annotate AdminService.LargeOrder{
+    ProjectValue @changelog;  
+    ProjectValueComment @changelog; 
+    PONumber @changelog; 
+    PONumberComment @changelog;
+    SONumber @changelog;
+    SONumberComment @changelog;   
+    InsideDelivery @changelog; 
+    InsideDeliveryComment @changelog;
+    Liftgate  @changelog;
+    LiftgateComment @changelog;
+    SpecialDeliveryRequirements @changelog;
+    SpecialDeliveryRequirementsComment @changelog;
+    Installation @changelog;
+    InstallationComment @changelog;
+    ConsolidatedInvoicing @changelog;
+    ConsolidatedInvoicingComment @changelog;
+    GrantFunds @changelog;
+    GrantFundsComment @changelog;
+    NewConstruction  @changelog;
+    NewConstructionComment @changelog;
+    SendInvoiceCopies @changelog;
+    SendInvoiceCopiesComment @changelog;
+    SendPacklistCopies @changelog;
+    SendPacklistCopiesComment @changelog;
+    ShipComplete @changelog;
+    ShipCompleteComment @changelog;
+    ProjectedDeliveryDate @changelog;
+    ProjectedDeliveryDateComment @changelog;
+}

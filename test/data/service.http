@@ -36,26 +36,26 @@ GET {{baseUrl}}/ticket/LargeOrder?
 
 ###
 
-# Get specific LargeOrder with TicketID = "Ticket2799"
+# Get specific LargeOrder with TicketID = "Ticket727"
 # @name Get1
-GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket2799'
+GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket727'
 Authorization: Basic adminuser:abcd1234
 Content-Type: application/json
 
 ###
 
-GET {{baseUrl}}/ticket/LargeOrder?ID=15d7fab6-5723-420b-8095-8b59c69dd340&IsActiveEntity=true
+GET {{baseUrl}}/ticket/LargeOrder?ID=143c210f-a7df-44ae-9ec9-cf9345bc90c5&IsActiveEntity=true
 
 ###
 
-GET {{baseUrl}}/ticket/openTicketFromC4C?ID='15d7fab6-5723-420b-8095-8b59c69dd340'&IsActiveEntity=true
+// Use an action to open the ticket
+GET {{baseUrl}}/ticket/openTicketFromC4C?ID='143c210f-a7df-44ae-9ec9-cf9345bc90c5'&IsActiveEntity=true
 
 
 ###
 
 # @name Get2
-GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID eq 'Ticket2799'
-Authorization: Basic adminuser:abcd1234
+GET {{baseUrl}}/ticket/LargeOrder?$filter=TicketID like 'Ticket727'
 Content-Type: application/json
 
 ###
@@ -75,7 +75,7 @@ Authorization: Basic adminuser:abcd1234
 
 ###
 
-GET {{baseUrl}}/ticket/LargeOrder?ID='15d7fab6-5723-420b-8095-8b59c69dd340'&IsActiveEntity=true
+GET {{baseUrl}}/ticket/LargeOrder?ID='143c210f-a7df-44ae-9ec9-cf9345bc90c5'&IsActiveEntity=true
 Content-Type: application/json
 Authorization: Basic adminuser:abcd1234
 
@@ -169,3 +169,11 @@ Content-Type: application/json
   "TicketID": "sheit1",
   "TicketObjectID": "sheit1ObjectID1"
 }
+
+###
+
+GET {{baseUrl}}/ticket/ChangeLog
+
+###
+
+GET {{baseUrl}}/ticket/ChangeView

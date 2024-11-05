@@ -15,13 +15,13 @@ module.exports = async function(results, request) {
 	console.log(messagetxt);
 	LOG.info(messagetxt);
 	//https://community.sap.com/t5/technology-blogs-by-sap/messaging-system-for-transferring-error-warning-and-information-messages/ba-p/13511991
-    results.warn({
+    request.warn({
 		code: "TCH_ACKNOWLEDGE",
 		message: messagetxt,
 		numericSeverity: 2
 	});
 
-	const { data }  = results.data;
+	const { data } = results.data;
 
 	await cds.emit({ event: LargeOrder.EntryCreated, data: { ID : data.ID, TicketID : data.TicketID } });
 }

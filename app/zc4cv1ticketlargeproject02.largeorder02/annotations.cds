@@ -401,10 +401,17 @@ annotate service.LargeOrder with {
 };
 
 annotate service.LargeOrder with {
-    ProjectValue_amount @Common.Text : ProjectValue_currency_code
+    ProjectValue @Common.Text : ProjectValue_currency_code
 };
 
 annotate service.LargeOrder with {
     TicketID @Common.FieldControl : #Mandatory
 };
 
+annotate service.LargeOrder with {
+    InsideDeliveryComment @Common.FieldControl : InsideDelivery.fieldControl;
+};
+
+//annotate service.LargeOrder_draft with {
+//    InsideDeliveryComment @Common.FieldControl : InsideDelivery.fieldControl;
+//};

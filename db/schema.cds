@@ -13,13 +13,14 @@ using
 }
 from '@sap/cds/common';
 
-annotate LargeOrder
+using
 {
-    modifiedAt
-        @odata.etag;
+    sap.changelog,
+    sap.changelog.aspect,
 }
+from '@cap-js/change-tracking';
 
-entity LargeOrder : managed
+entity LargeOrder : managed, aspect
 {
     key ID : UUID;
     TicketObjectID : String(32) not null;
@@ -31,7 +32,8 @@ entity LargeOrder : managed
     PONumberComment : LargeString;
     SONumber : String(10);
     SONumberComment : LargeString;
-    InsideDelivery : Association to one InsideDeliveryValue;
+    InsideDelivery : Association to one InsideDeliveryValue
+        @assert.target;
     InsideDeliveryComment : LargeString;
     Liftgate : Boolean;
     LiftgateComment : LargeString;
@@ -55,6 +57,11 @@ entity LargeOrder : managed
     ProjectedDeliveryDateComment : LargeString;
 }
 
+annotate LargeOrder with @assert.unique :
+{
+    locTicketIDale : [ TicketID ],
+};
+
 type Price
 {
     amount : Decimal(10,2);
@@ -67,3 +74,56 @@ entity InsideDeliveryValue : CodeList
     fieldControl : Integer;
 }
 
+entity LiftgateValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}
+
+entity SpecialDeliveryRequirementsValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}
+
+entity InstallationValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}
+
+entity ConsolidatedInvoicingValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}
+
+entity GrantFundsValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}
+
+entity NewConstructionValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}
+
+entity SendInvoiceCopiesValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}
+
+entity SendPacklistCopiesValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}
+
+entity ShipCompleteValue : CodeList
+{
+    key code : Boolean default false;
+    fieldControl : Integer;
+}

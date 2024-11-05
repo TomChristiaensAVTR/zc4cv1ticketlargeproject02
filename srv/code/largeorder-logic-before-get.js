@@ -30,7 +30,7 @@ module.exports = async function(request) {
 		}
 	}
 	else {
-		if (RequestedID.length < 25 && RequestedID.length > 1) {
+		if (RequestedID.length < 15 && RequestedID.length > 1) {
 			messagetxt = `TCH - ${RequestedID} is shorter then 15 and longer then 1`;
 			console.log(messagetxt);
 			LOG.info(messagetxt);
