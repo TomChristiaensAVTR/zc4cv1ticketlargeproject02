@@ -64,7 +64,7 @@ annotate service.LargeOrder with @(
         },
         {
             $Type : 'UI.CollectionFacet',
-            Label : 'General Group Section',
+            Label : '{i18n>GeneralGroupSection}',
             ID : 'GeneralGroupSection',
             Facets : [
                 {
@@ -75,19 +75,19 @@ annotate service.LargeOrder with @(
                 },
                 {
                     $Type : 'UI.ReferenceFacet',
-                    Label : 'Special Delivery Requirements subsection',
+                    Label : '{i18n>SpecialDeliveryRequirementsSubsection}',
                     ID : 'SpecialDeliveryRequirementssubsection',
                     Target : '@UI.FieldGroup#SpecialDeliveryRequirementssubsection',
                 },
                 {
                     $Type : 'UI.ReferenceFacet',
-                    Label : 'Liftgate subsection',
+                    Label : '{i18n>LiftgateSubsection}',
                     ID : 'SpecialDeliveryRequirementssubsection1',
                     Target : '@UI.FieldGroup#SpecialDeliveryRequirementssubsection1',
                 },
                 {
                     $Type : 'UI.ReferenceFacet',
-                    Label : 'Installation subsection',
+                    Label : '{i18n>InstallationSubsection}',
                     ID : 'Installationsubsection',
                     Target : '@UI.FieldGroup#Installationsubsection',
                 },
@@ -99,7 +99,7 @@ annotate service.LargeOrder with @(
                 },
                 {
                     $Type : 'UI.ReferenceFacet',
-                    Label : 'Grant Funds subsection',
+                    Label : '{i18n>GrantFundsSubsection}',
                     ID : 'GrantFundssubsection',
                     Target : '@UI.FieldGroup#GrantFundssubsection',
                 },
@@ -113,21 +113,27 @@ annotate service.LargeOrder with @(
         },
         {
             $Type : 'UI.ReferenceFacet',
-            Label : '{i18n>PoSection}',
-            ID : 'i18nPoSection',
-            Target : '@UI.FieldGroup#i18nPoSection',
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
             Label : '{i18n>ProjectSection}',
             ID : 'ProjectSection',
             Target : '@UI.FieldGroup#ProjectSection',
         },
         {
             $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>PoSection}',
+            ID : 'i18nPoSection',
+            Target : '@UI.FieldGroup#i18nPoSection',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
             Label : '{i18n>SoSection}',
             ID : 'i18nSoSection',
             Target : '@UI.FieldGroup#i18nSoSection',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>AdministrativeData}',
+            ID : 'AdministrativeData',
+            Target : '@UI.FieldGroup#AdministrativeData',
         },
     ],
     UI.LineItem : [
@@ -160,6 +166,11 @@ annotate service.LargeOrder with @(
         },
     ],
     UI.Identification : [
+        {
+            $Type : 'UI.DataField',
+            Value : ID,
+            Label : 'ID',
+        },
         {
             $Type : 'UI.DataField',
             Label : '{i18n>C4cTicketUuid}',
@@ -340,6 +351,30 @@ annotate service.LargeOrder with @(
             ],
         },
     },
+    UI.SelectionFields : [
+        TicketID,
+    ],
+    UI.FieldGroup #AdministrativeData : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : createdBy,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : createdAt,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : modifiedBy,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : modifiedAt,
+            },
+        ],
+    },
 );
 
 annotate service.LargeOrder with {
@@ -405,7 +440,10 @@ annotate service.LargeOrder with {
 };
 
 annotate service.LargeOrder with {
-    TicketID @Common.FieldControl : #Mandatory
+    TicketID @(
+        Common.FieldControl : #Mandatory,
+        Common.Label : 'TicketID',
+    )
 };
 
 annotate service.LargeOrder with {

@@ -23,7 +23,7 @@ from '@cap-js/change-tracking';
 entity LargeOrder : managed, aspect
 {
     key ID : UUID;
-    TicketObjectID : String(32) not null;
+    TicketObjectID : String(32);
     TicketID : String(10)
         @Core.Description : 'C4C Ticket ID';
     ProjectValue : Price;

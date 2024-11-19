@@ -31,10 +31,11 @@
     "start-local": "npm run generate-entry-point && npm run cds-watch",
     "generate-entry-point": "dev-cap-tools gen-entrypoint",
     "cds-watch": "cds watch --open",
-    "watch-zc4cv1ticketlargeproject02.largeorder02": "cds watch --open zc4cv1ticketlargeproject02.largeorder02/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-zc4cv1ticketlargeproject02.largeorder02": "cds watch --open zc4cv1ticketlargeproject02.largeorder02/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-zc4cv1ticketlargeproject02.lightlargeorder02": "cds watch --open zc4cv1ticketlargeproject02.lightlargeorder02/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
-    "fiori" :{
+    "fiori": {
       "bypass_draft": true
     },
     "requires": {
@@ -74,6 +75,7 @@
   },
   "lcap": true,
   "sapux": [
-    "app/zc4cv1ticketlargeproject02.largeorder02"
+    "app/zc4cv1ticketlargeproject02.largeorder02",
+    "app/zc4cv1ticketlargeproject02.lightlargeorder02"
   ]
 }

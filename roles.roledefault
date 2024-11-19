@@ -38,5 +38,13 @@
 			"IsSimple": true,
 			"SimplePrivilege": 2
 		}
+	},
+	{
+		"Name": "Lightadmin",
+		"Description": "Lightadmin",
+		"defaultPrivilege": {
+			"IsSimple": true,
+			"SimplePrivilege": 3
+		}
 	}
 ]

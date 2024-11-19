@@ -49,7 +49,11 @@
     {
       "type": "dpt.ptdeploy",
       "label": "Deploy zc4cv1ticketlargeproject02",
-      "taskType": "Deploy"
+      "taskType": "Deploy",
+      "ui5version": "1.130.0",
+      "ui5theme": "sap_belize",
+      "vendorDependency": false,
+      "buildCodeServicePlan": false
     },
     {
       "type": "dpt.ptdeploy",
@@ -62,7 +66,22 @@
       "label": "Template: Build MTA: zc4cv1ticketlargeproject02 - PT",
       "taskType": "Build",
       "projectPath": "/home/user/projects/zc4cv1ticketlargeproject02",
-      "extensions": []
+      "extensions": [],
+      "ui5version": "1.130.0",
+      "ui5theme": "sap_belize",
+      "vendorDependency": false,
+      "buildCodeServicePlan": false
+    },
+    {
+      "type": "build.mta",
+      "label": "Template: Build MTA: zc4cv1ticketlargeproject02 - PT (2)",
+      "taskType": "Build",
+      "projectPath": "/home/user/projects/zc4cv1ticketlargeproject02",
+      "extensions": [],
+      "vendorDependency": false,
+      "buildCodeServicePlan": false,
+      "ui5version": "1.130.0",
+      "ui5theme": "sap_belize"
     }
   ]
 }

@@ -3,9 +3,9 @@
 
 <head>
     <title> Application Overview </title>
-    <script src="https://ui5.sap.com/1.120.17/resources/sap-ui-core.js" 
+    <script src="https://ui5.sap.com/1.130.0/resources/sap-ui-core.js" 
             id="sap-ui-bootstrap"
-            data-sap-ui-theme="sap_horizon"
+            data-sap-ui-theme="sap_belize"
             data-sap-ui-bindingSyntax="complex" 
             data-sap-ui-xx-bindingSyntax="complex"
             data-sap-ui-resourceroots='{"assets": "assets"}' 
@@ -27,7 +27,7 @@
                     return Controller.extend("PreviewController", {
                         onInit: function () {
 
-                            const data = {"Services":[{"ServiceName":"AdminService","DetailsURL":"./ticket/","Metadata":"./ticket/$metadata","Entities":[{"Name":"LargeOrder","URL":"./ticket/LargeOrder","FioriURL":""}],"EntitiesCount":1}]}
+                            const data = {"Services":[{"ServiceName":"AdminService","DetailsURL":"./ticket/","Metadata":"./ticket/$metadata","Entities":[{"Name":"LargeOrder","URL":"./ticket/LargeOrder","FioriURL":""},{"Name":"ChangeView","URL":"./ticket/ChangeView","FioriURL":""}],"EntitiesCount":2},{"ServiceName":"LightService","DetailsURL":"./default/","Metadata":"./default/$metadata","Entities":[{"Name":"LargeOrder","URL":"./default/LargeOrder","FioriURL":""}],"EntitiesCount":1}]}
                             this.getView().setModel(new JSONModel(data));
                         }
                     });

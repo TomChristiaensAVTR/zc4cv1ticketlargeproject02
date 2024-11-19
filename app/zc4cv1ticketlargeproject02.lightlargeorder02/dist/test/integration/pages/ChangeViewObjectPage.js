@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/test/ObjectPage"],function(e){"use strict";var t={actions:{},assertions:{}};return new e({appId:"zc4cv1ticketlargeproject02.lightlargeorder02",componentId:"ChangeViewObjectPage",contextPath:"/LargeOrder/changes"},t)});
+//# sourceMappingURL=ChangeViewObjectPage.js.map

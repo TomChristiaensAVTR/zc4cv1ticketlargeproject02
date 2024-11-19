@@ -7,6 +7,12 @@
   },
   "routes": [
     {
+      "source": "^/default/(.*)$",
+      "target": "/default/$1",
+      "destination": "zc4cv1ticketlargeproject02-app-srv",
+      "authenticationType": "xsuaa"
+    },
+    {
       "source": "^/ticket/(.*)$",
       "target": "/ticket/$1",
       "destination": "zc4cv1ticketlargeproject02-app-srv",

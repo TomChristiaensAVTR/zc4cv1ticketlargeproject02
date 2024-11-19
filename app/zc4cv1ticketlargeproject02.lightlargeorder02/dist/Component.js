@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/core/AppComponent"],function(e){"use strict";return e.extend("zc4cv1ticketlargeproject02.lightlargeorder02.Component",{metadata:{manifest:"json"},getStartupParameters:function(){return Promise.resolve({preferredMode:["edit"]})}})});
+//# sourceMappingURL=Component.js.map

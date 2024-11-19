@@ -44,6 +44,24 @@ modules:
       _artifactName: zc4cv1ticketlargeproject02largeorder02.zip
       supported-platforms: []
       build-result: dist-zip
+  - name: zc4cv1ticketlargeproject02-zc4cv1ticketlargeproject02.lightlargeorder02
+    type: html5
+    path: app/zc4cv1ticketlargeproject02.lightlargeorder02
+    build-parameters:
+      builder: custom
+      commands:
+        - rm -rf dist-zip dist
+        - npm install
+        - >-
+          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist
+          --include-task=generateCachebusterInfo
+        - mkdir dist-zip
+        - >-
+          bash -c "cd dist && npx bestzip
+          ../dist-zip/zc4cv1ticketlargeproject02lightlargeorder02.zip *"
+      _artifactName: zc4cv1ticketlargeproject02lightlargeorder02.zip
+      supported-platforms: []
+      build-result: dist-zip
   - name: zc4cv1ticketlargeproject02-db-deployer
     type: hdb
     path: gen/db
@@ -108,11 +126,11 @@ modules:
               sap.cloud.service: lcap.zc4cv1ticketlargeproject02
               sap.applicationdevelopment.actions.enabled: true
               sap.build.usage: CAP
-              sap.processautomation.enabled: true
-              HTML5.DynamicDestination: true
-              WebIDEEnabled: true
-              MobileEnabled: true
-              AppgyverEnabled: true
+              sap.processautomation.enabled: false
+              HTML5.DynamicDestination: false
+              WebIDEEnabled: false
+              MobileEnabled: false
+              AppgyverEnabled: false
     build-parameters:
       no-source: true
     requires:
@@ -152,6 +170,11 @@ modules:
         - name: zc4cv1ticketlargeproject02-zc4cv1ticketlargeproject02.largeorder02
           artifacts:
             - zc4cv1ticketlargeproject02largeorder02.zip
+          target-path: resources
+        - name: >-
+            zc4cv1ticketlargeproject02-zc4cv1ticketlargeproject02.lightlargeorder02
+          artifacts:
+            - zc4cv1ticketlargeproject02lightlargeorder02.zip
           target-path: resources
         - name: zc4cv1ticketlargeproject02-launchpad
           artifacts:

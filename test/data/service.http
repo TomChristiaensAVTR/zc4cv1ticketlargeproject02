@@ -166,8 +166,9 @@ POST {{baseUrl}}/ticket/LargeOrder
 Content-Type: application/json
 
 {
-  "TicketID": "sheit1",
-  "TicketObjectID": "sheit1ObjectID1"
+  "TicketID": "0611202401",
+  "TicketObjectID": "sheit1ObjectID1",
+  "IsActiveEntity": true
 }
 
 ###
@@ -177,3 +178,23 @@ GET {{baseUrl}}/ticket/ChangeLog
 ###
 
 GET {{baseUrl}}/ticket/ChangeView
+
+
+###
+
+GET {{baseUrl}}/ticket/ChangeViewProjection?$filter=entityKey eq '143c210f-a7df-44ae-9ec9-cf9345bc90c5'
+
+###
+
+POST {{baseUrl}}/ticket/createTicketFromC4C
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+
+{
+   "iv_TicketID" : "0611202401"
+}
+
+###
+
+GET {{baseUrl}}/ticket/LargeOrder
+Content-Type: application/json
